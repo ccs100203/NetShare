@@ -95,6 +95,7 @@ void packetHandler(u_char *userData, const struct pcap_pkthdr* pkthdr, const u_c
 
     p.srcip = ntohl(tmpPkt1.s_addr);
     p.dstip = ntohl(tmpPkt2.s_addr);
+    printf("%d, %d\n", tmpPkt1.s_addr, p.srcip);
 
 
     p.ip_hl = (unsigned int)ipHeader->ip_hl;
@@ -220,7 +221,8 @@ int main(int argc, char const *argv[])
             strcpy(proto, "UDP");
         }
         else{
-            printf("Not TCP/UDP packet!\n");
+            // printf("Not TCP/UDP packet!\n");
+            // printf("%d, %d\n", p.srcip, p.dstip);
         }
 
         fprintf(fp, "%u,%u,%hu,%hu,%s,%lu,%hu,%u,%u,%u,%hu,%hu,%hu,%u,%hu\n", p.srcip, p.dstip, p.srcport, p.dstport, proto, p.timestamp, p.ip_len, p.ip_v, p.ip_hl, p.ip_tos, p.ip_id, ip_flag, ip_off, p.ip_ttl, p.ip_sum);
